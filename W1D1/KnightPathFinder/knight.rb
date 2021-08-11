@@ -11,7 +11,7 @@ class KnightPathFinder
         @current_pos = start_pos
         @root = PolyTreeNode.new(start_pos)
         @moves = {}
-        @visted_positions = [start_pos]
+        @visited_positions = [start_pos]
     end
 
     def build_move_tree
@@ -26,6 +26,7 @@ class KnightPathFinder
             next_moves = new_moves_positions(current_move.value)
 
             next_moves.each {|next_move| @moves[next_move] = current_move}
+
             new_moves.concat(next_moves)
         end
 
@@ -33,29 +34,15 @@ class KnightPathFinder
 
     end
 
-    #  def build_move_tree
-    #     queue = [@root]
-    #     until queue.empty?
-    #         previous = queue.shift
-    #         moves = new_moves_positions(previous.value)
-    #         moves.each do |move|
-    #             next_move = PolyTreeNode.new(move)
-    #             previous.add_child(next_move)
-    #             queue << next_move
-    #             p next_move.value
-    #         end
-    #     end
-    # end
-    
-
     def new_moves_positions(pos)
-        current_move = valid_positions(pos).reject {|el| @visted_positions.include?(el)}
 
-        current_move.each do |el|
-            @visted_positions << el unless @visted_positions.include?(el)
+        new_moves = valid_positions(pos).reject {|el| @visited_positions.include?(el)}
+        
+        new_moves.each do |el|
+            @visited_positions << el unless @visited_positions.include?(el)
         end
-
-        current_move
+        
+        new_moves
     end
 
     def valid_positions(pos)
@@ -63,9 +50,10 @@ class KnightPathFinder
         DELTAS.map do |deltas|
             x, y = deltas
             if (row + x).between?(0, 7) && (col + y).between?(0, 7)
-             [row + x, col + y]
+                [row + x, col + y]
             end
         end.reject(&:nil?)
+     
     end
 
 
