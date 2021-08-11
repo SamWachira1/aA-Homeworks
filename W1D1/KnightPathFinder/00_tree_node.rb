@@ -1,9 +1,10 @@
+require 'byebug'
 module Searchable
 
   def dfs(target_value)
     return self if self.value == target_value 
       _children.each do |node|
-        current = node.dfs(target_value)
+         current = node.dfs(target_value)
         return current if current
     end
     nil
@@ -62,6 +63,9 @@ class PolyTreeNode
 
 
 end
+
+# n = PolyTreeNode.new(3)
+# p n.dfs(3)
 
 
   

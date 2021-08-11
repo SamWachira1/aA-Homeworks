@@ -41,7 +41,7 @@ class KnightPathFinder
         new_moves.each do |el|
             @visited_positions << el unless @visited_positions.include?(el)
         end
-        
+
         new_moves
     end
 
@@ -53,11 +53,33 @@ class KnightPathFinder
                 [row + x, col + y]
             end
         end.reject(&:nil?)
-     
     end
 
+    def find_path(end_pos)
+      node = @root.dfs(end_pos)
+      trace_path_back(node)
+    end
 
+    def trace_path_back(node)
+        res = [node.value]
+
+        until node.parent.nil?
+        res << node.parent.value
+        node = node.parent
+        end
+    res.reverse
+  end
 end
+
+
+ 
+
+
+
+#   if $PROGRAM_NAME == __FILE__
+#         kpf = KnightPathFinder.new([0,0])
+#         p kpf.find_path([6,6])
+#   end
 
 
 
