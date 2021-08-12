@@ -72,10 +72,10 @@ class KnightPathFinder
 end
 
 
-#   if $PROGRAM_NAME == __FILE__
-#         kpf = KnightPathFinder.new([0,0])
-#         p kpf.find_path([6,6])
-#   end
+  if $PROGRAM_NAME == __FILE__
+        kpf = KnightPathFinder.new([0,0])
+        p kpf.find_path([6,6])
+  end
 
 
 
