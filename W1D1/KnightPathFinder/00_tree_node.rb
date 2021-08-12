@@ -64,8 +64,7 @@ class PolyTreeNode
 
 end
 
-# n = PolyTreeNode.new(3)
-# p n.dfs(3)
+
 
 
   
