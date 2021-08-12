@@ -11,7 +11,8 @@ class KnightPathFinder
         @current_pos = start_pos
         @root = PolyTreeNode.new(start_pos)
         @moves = {}
-        @visited_positions = [start_pos]
+        @visted_positions = [start_pos]
+
         self.build_move_tree
     end
 
@@ -26,21 +27,18 @@ class KnightPathFinder
             current_move.parent = @moves[current_move.value]
             next_moves = new_moves_positions(current_move.value)
 
-            next_moves.each {|next_move| @moves[next_move] = current_move}
-
+            next_moves.each {|next_move| @moves[next_move] = current_move }
             new_moves.concat(next_moves)
         end
 
         @root
-
     end
 
     def new_moves_positions(pos)
+        new_moves = valid_positions(pos).reject {|el| @visted_positions.include?(el)}
 
-        new_moves = valid_positions(pos).reject {|el| @visited_positions.include?(el)}
-        
         new_moves.each do |el|
-            @visited_positions << el unless @visited_positions.include?(el)
+            @visted_positions << el unless @visted_positions.include?(el)
         end
 
         new_moves
@@ -57,24 +55,21 @@ class KnightPathFinder
     end
 
     def find_path(end_pos)
-      node = @root.dfs(end_pos)
-      trace_path_back(node)
+        node = @root.dfs(end_pos)
+        trace_path_back(node)
     end
 
     def trace_path_back(node)
         res = [node.value]
 
         until node.parent.nil?
-        res << node.parent.value
-        node = node.parent
+            res << node.parent.value
+            node = node.parent
         end
-    res.reverse
-  end
+        
+        res.reverse
+    end
 end
-
-
- 
-
 
 
 #   if $PROGRAM_NAME == __FILE__
