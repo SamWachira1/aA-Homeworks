@@ -5,28 +5,38 @@ class TicTacToeNode
   attr_reader :board, :next_mover_mark, :prev_move_pos
 
   def initialize(board, next_mover_mark, prev_move_pos = nil)
-    @board, @next_mover_mark, @prev_move_pos = 
-    board, next_mover_mark, prev_move_pos
+    @board, @next_mover_mark, @prev_move_pos = board, next_mover_mark,
+    prev_move_pos
   end
 
   def losing_node?(evaluator)
     if board.over?
-    return board.won? && board.winner != evaluator
+      return board.won? && board.winner != evaluator
     end
 
     if self.next_mover_mark == evaluator
-      self.children.all? {|node| node.losing_node?(evaluator) }
+      self.children.all? {|node| node.losing_node?(evaluator)}
+    else 
+      self.children.any? {|node| node.losing_node?(evaluator)}
     end
 
   end
 
   def winning_node?(evaluator)
+    if board.over?
+      return board.winner == evaluator
+    end
+    
+      if self.next_mover_mark == evaluator
+        self.children.any? {|node| node.winning_node?(evaluator)}
+      else  
+        self.children.all? {|node| node.winning_node?(evaluator)}
+    end
   end
 
   # This method generates an array of all moves that can be made after
   # the current move.
   def children
-
     children = []
 
     (0..2).each do |row_indx|
@@ -43,6 +53,6 @@ class TicTacToeNode
     end
 
     children
-
+ 
   end
 end
