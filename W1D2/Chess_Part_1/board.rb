@@ -19,7 +19,25 @@ class Board
         self[pos] = piece
     end
 
+    def empty?(pos)
+        self[pos].empty?
+    end
+
+    def fill_pawn_row(color)
+        row = (color == :white) ? 6 : 1
+        8.times do |col|
+            Pawn.new(color, self, [row, col])
+        end
+    end
     
+    def fill_back_row(color)
+        back_ranks = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
+        row = (color == :white) ? 7 : 0 
+        back_ranks.each_with_index do |rank, col|
+            rank.new(color, self, [row, col])
+        end
+    end
+
     def check_mate?(color)
         in_check?(color) && 
         rows.flatten.none? {|pc| pc.color == color && !pc.valid_moves.nil?}

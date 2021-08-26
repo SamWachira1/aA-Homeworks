@@ -1,7 +1,7 @@
 require_relative "piece"
 require_relative "./modules/sliding_pieces"
 
-class Bishopc < Piece
+class Bishop < Piece
   include Slideable
 
    def symbol
