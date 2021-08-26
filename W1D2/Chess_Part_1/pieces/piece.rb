@@ -5,8 +5,10 @@ class Piece
     attr_accessor :pos
     def initialize(color, board, pos)
         @color = color
-        @board = board 
+        @board = board
         @pos = pos
+
+        board.add_piece(self, pos)
     end
 
     def to_s
@@ -14,7 +16,7 @@ class Piece
     end
 
     def valid_moves
-        moves.select do |pos|
+        board.select do |pos|
             board.in_bounds?(pos) &&
             (board.is_null?(pos)) || board[pos].color != color
         end
