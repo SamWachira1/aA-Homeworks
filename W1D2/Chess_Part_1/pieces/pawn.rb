@@ -24,7 +24,7 @@ class Pawn < Piece
     def forward_step
         i, j = pos
         one_step = [i + forward_dir,  j]
-        return [] unless board.in_bound?(one_step) && board.empty?(one_step)
+        return [] unless board.in_bounds?(one_step) && board.empty?(one_step)
 
         steps = [one_step]
         two_steps = [i + 2 * forward_dir, j]

@@ -15,11 +15,26 @@ class Piece
         symbol
     end
 
+
+    # def valid_moves
+    #     board.select do |pos|
+    #         (board.in_bounds?(pos)) &&
+    #         (board.is_null?(pos)) || (board[pos].color != color)
+    #     end
+        
+    # end
+
     def valid_moves
-        board.select do |pos|
-            board.in_bounds?(pos) &&
-            (board.is_null?(pos)) || board[pos].color != color
-        end
+        moves.reject {|end_pos| move_into_check?(end_pos)}
+    end
+
+    private
+
+
+    def move_into_check?(end_pos)
+        test_board = board.dup
+        test_board.move_piece(color, start_pos, end_pos)
+        test_board.in_check?(color)
     end
 
 

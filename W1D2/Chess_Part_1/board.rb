@@ -3,15 +3,19 @@ require_relative "pieces"
 class Board
  
     attr_reader :rows, :null
-    def initialize
-        @rows = populate_board
+    def initialize(fill_board = true)
+       @null = NullPiece.instance
+       board = populate_board(fill_board)
+       board
     end
 
-    def populate_board
-     @null = NullPiece.instance
-     
-     board = Array.new(8) {Array.new(8, null) }
-     board   
+    def populate_board(fill_board)
+     @rows = Array.new(8) {Array.new(8, null) }
+        return unless fill_board
+        %i(white black).each do |color|
+            fill_back_row(color)
+            fill_pawn_row(color)
+        end
     end
 
 
@@ -26,8 +30,9 @@ class Board
     def fill_pawn_row(color)
         row = (color == :white) ? 6 : 1
         8.times do |col|
-            Pawn.new(color, self, [row, col])
+            Pawn.new(color, self, [row, col] )
         end
+        
     end
     
     def fill_back_row(color)
@@ -38,6 +43,7 @@ class Board
         end
     end
 
+    
     def check_mate?(color)
         in_check?(color) && 
         rows.flatten.none? {|pc| pc.color == color && !pc.valid_moves.nil?}
@@ -75,18 +81,22 @@ class Board
         pos.all? { |coord| coord.between?(0, 7) }
     end
 
+    def pieces
+        @rows.flatten.reject(&:empty?)
+    end
+
     def is_null?(pos)
         self[pos] == null
     end
 
     def [](pos)
         row, col = pos
-        rows[row][col]
+        @rows[row][col]
     end
 
     def []=(pos, piece)
         row, col = pos
-        rows[row][col] = piece
+        @rows[row][col] = piece
     end
 
     def move_piece(color, start_pos, end_pos)
