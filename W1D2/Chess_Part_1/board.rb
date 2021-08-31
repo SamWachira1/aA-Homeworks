@@ -10,7 +10,7 @@ class Board
     end
 
     def populate_board(fill_board)
-     @rows = Array.new(8) {Array.new(8, null) }
+     @rows = Array.new(8) {Array.new(8, :null) }
         return unless fill_board
         %i(white black).each do |color|
             fill_back_row(color)

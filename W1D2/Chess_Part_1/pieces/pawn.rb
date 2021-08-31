@@ -38,7 +38,7 @@ class Pawn < Piece
         side_moves = [[i + forward_dir, j - 1]], [[i + forward_dir, j + 1]]
         
         side_moves.select do |new_pos|
-            next false unless board.in_bound?(new_pos) 
+            next false unless board.in_bounds?(new_pos) 
             next false if board.empty?(new_pos)
 
             threatened_pos = board[new_pos]
