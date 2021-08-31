@@ -43,7 +43,6 @@ class Board
         end
     end
 
-    
     def check_mate?(color)
         in_check?(color) && 
         rows.flatten.none? {|pc| pc.color == color && !pc.valid_moves.nil?}
@@ -113,12 +112,5 @@ class Board
     end
 
 
-
-
-
-
-
-
-
-
 end
+

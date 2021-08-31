@@ -15,7 +15,6 @@ class Piece
         symbol
     end
 
-
     # def valid_moves
     #     board.select do |pos|
     #         (board.in_bounds?(pos)) &&
