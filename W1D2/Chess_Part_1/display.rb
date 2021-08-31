@@ -63,4 +63,4 @@ class Display
     end
 
 
-p test = Display.new(self).render
+# p test = Display.new(self).render

@@ -18,7 +18,6 @@ class Board
         end
     end
 
-
     def add_piece(piece, pos)
         self[pos] = piece
     end
