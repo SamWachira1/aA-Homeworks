@@ -1,5 +1,5 @@
 require_relative "piece"
-require_relative "./modules/sliding_pieces"
+require_relative "sliding_pieces"
 
 class Queen < Piece
     include Slideable
@@ -11,9 +11,6 @@ class Queen < Piece
     protected 
 
     def move_dirs
-        diag + linear
+    horizontal_and_vertical_dirs + diagonal_dirs
     end
-
-
-
 end

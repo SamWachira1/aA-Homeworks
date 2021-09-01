@@ -1,5 +1,5 @@
 require_relative "piece"
-require_relative "./modules/sliding_pieces"
+require "sliding_pieces"
 
 class Bishop < Piece
   include Slideable
@@ -11,7 +11,7 @@ class Bishop < Piece
     protected 
 
     def move_dirs
-        linear
+        diag
     end
 
 

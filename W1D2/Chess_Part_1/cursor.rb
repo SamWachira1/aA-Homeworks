@@ -44,7 +44,7 @@ class Cursor
     handle_key(key)
   end
 
-#   private
+  private
 
   def read_char
     STDIN.echo = false # stops the console from printing return values

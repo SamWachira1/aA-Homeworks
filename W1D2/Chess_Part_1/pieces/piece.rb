@@ -4,23 +4,18 @@ class Piece
     attr_reader :board, :color
     attr_accessor :pos
     def initialize(color, board, pos)
+        raise "invalid color" unless %i(white, black)
+        raise "invalid_pos" unless board.valid_pos?(pos)
+
         @color = color
         @board = board
         @pos = pos
 
-        board.add_piece(self, pos)
+        @board.add_piece(self, pos)
     end
 
     def to_s
-       symbol 
-    end
-
-    def valid_moves
-        moves.select do |pos|
-            (board.in_bounds?(pos)) &&
-            (board.is_null?(pos)) || (board[pos].color != color)
-        end
-        
+     " #{symbol} "
     end
 
     def empty?
@@ -31,9 +26,9 @@ class Piece
       raise NotImplementedError
     end
 
-    # def valid_moves
-    #   moves.reject { |end_pos| move_into_check?(end_pos) }
-    # end
+    def valid_moves
+      moves.reject { |end_pos| move_into_check?(end_pos) }
+    end
 
     private
 
@@ -43,7 +38,5 @@ class Piece
         test_board.move_piece(color, start_pos, end_pos)
         test_board.in_check?(color)
     end
-
-
 
 end

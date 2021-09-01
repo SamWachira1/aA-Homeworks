@@ -1,6 +1,11 @@
 require_relative "piece"
+# require "byebug"
 
 class Pawn < Piece
+
+    # def initialize(color, board, pos)
+    #     super(color, board, pos)
+    # end
 
     def symbol
       '♟'.colorize(color)
@@ -24,28 +29,29 @@ class Pawn < Piece
     def forward_step
         i, j = pos
         one_step = [i + forward_dir,  j]
-        return [] unless board.in_bounds?(one_step) && board.empty?(one_step)
+        return [] unless board.valid_pos?(one_step) && board.empty?(one_step)
 
         steps = [one_step]
         two_steps = [i + 2 * forward_dir, j]
-        steps << two_steps if at_start_row && board.empty?(two_steps)
+        steps << two_steps if at_start_row? && board.empty?(two_steps)
         steps
     
     end
 
     def side_attacks
-        i, j = pos
-        side_moves = [i + forward_dir, j - 1], [i + forward_dir, j + 1]
+        # debugger
+     i, j = pos
 
-        
-        side_moves.select do |new_pos|
-            next false unless board.in_bounds?(new_pos) 
-            next false if board.empty?(new_pos)
+     side_moves = [[i + forward_dir, j - 1], [i + forward_dir, j + 1]]
 
-            threatened_pos = board[new_pos]
-            threatened_pos && threatened_pos.color != color
-        end
+     side_moves.select do |new_pos|
+      next false unless board.valid_pos?(new_pos)
+      next false if board.empty?(new_pos)
+
+      threatened_piece = board[new_pos]
+      threatened_piece && threatened_piece.color != color
     end
+  end
 
 end
 
