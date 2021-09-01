@@ -1,5 +1,5 @@
 require_relative "piece"
-# require "byebug"
+require "byebug"
 
 class Pawn < Piece
 
@@ -15,9 +15,9 @@ class Pawn < Piece
         forward_step + side_attacks
     end
 
-    private
+    # private
 
-    def at_start_row
+    def at_start_row?
         pos[0] == (color == :white) ? 6 : 1
     end
 
@@ -33,15 +33,15 @@ class Pawn < Piece
 
         steps = [one_step]
         two_steps = [i + 2 * forward_dir, j]
-        steps << two_steps if at_start_row? && board.empty?(two_steps)
+        steps << two_steps if self.at_start_row? && board.empty?(two_steps)
         steps
     
     end
 
     def side_attacks
-        # debugger
-     i, j = pos
-
+    # debugger
+    i, j = pos
+    # puts = pos
      side_moves = [[i + forward_dir, j - 1], [i + forward_dir, j + 1]]
 
      side_moves.select do |new_pos|

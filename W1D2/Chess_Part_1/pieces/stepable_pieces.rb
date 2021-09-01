@@ -3,7 +3,7 @@ module SteppingPiece
     def moves
        move_diffs.each_with_object([]) do |(dx, dy)|
         cur_x, cur_y = pos
-        pos = [curx + dx, cur_y + dy]
+        pos = [cur_x + dx, cur_y + dy]
 
         next unless board.valid_pos?(pos)
  

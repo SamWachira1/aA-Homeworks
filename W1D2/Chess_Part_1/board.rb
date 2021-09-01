@@ -1,6 +1,5 @@
 require_relative "pieces"
 
-
 class Board 
  
     attr_reader :rows
@@ -9,15 +8,6 @@ class Board
        @null = NullPiece.instance
        board = populate_board(fill_board)
        board
-    end
-
-    def populate_board(fill_board)
-     @rows = Array.new(8) {Array.new(8, :null) }
-        return unless fill_board
-        %i(white black).each do |color|
-            fill_back_row(color)
-            fill_pawn_row(color)
-        end
     end
 
     def [](pos)
@@ -45,7 +35,7 @@ class Board
     def dup
         new_board = Board.new(false)
          pieces.each do |piece|
-            piece.class.new(piece.color, board, piece.pos)
+            piece.class.new(piece.color, new_board, piece.pos)
          end
          new_board
     end
@@ -56,10 +46,10 @@ class Board
     end
 
     def in_check?(color)
-       king_pos = find_king(color).pos
+       king_pos = find_king_pos(color).pos
 
        pieces.any?  do |p|
-        p.color != color && p.move.include?(king_pos)
+        p.color != color && p.moves.include?(king_pos)
        end
     end
 
@@ -81,24 +71,24 @@ class Board
 
 
     def move_piece!(start_pos, end_pos)
+        piece = self[start_pos]
+        raise 'piece cannot move like that' unless piece.moves.include?(end_pos)
 
         self[end_pos] = piece
-        self[start_pos] = :null 
-        raise 'you cannot move like that' unless piece.moves.include?(end_pos)
-
-        self[end_pos] = piece
-        self[start_pos] = :null
-        pieces.pos = end_pos
+        self[start_pos] = @null
+        piece.pos = end_pos
 
         nil
+       
     end
+
 
      def pieces
         @rows.flatten.reject(&:empty?)
     end
 
     def valid_pos?(pos)
-        pos.all? {|coord| coord.between?(0, 7) }
+       puts  pos.all? {|coord| coord.between?(0, 7) }
     end
 
 
@@ -124,6 +114,15 @@ class Board
     def find_king_pos(color)
         king_pos = pieces.find {|p| p.color == color && p.is_a?(King)}
         king_pos || (raise "king not found")
+    end
+
+    def populate_board(fill_board)
+     @rows = Array.new(8) {Array.new(8, @null) }
+        return unless fill_board
+        %i(white black).each do |color|
+            fill_back_row(color)
+            fill_pawn_row(color)
+        end
     end
 
 
