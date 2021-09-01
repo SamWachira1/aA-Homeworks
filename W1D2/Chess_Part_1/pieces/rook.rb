@@ -1,5 +1,5 @@
 require_relative "piece"
-require_relative "./modules/sliding_pieces"
+require_relative "sliding_pieces"
 
 class Rook < Piece
     include Slideable

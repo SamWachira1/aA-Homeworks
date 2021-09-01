@@ -1,6 +1,4 @@
 
-
-
 module Slideable 
   HORIZONTAL_AND_VERTICAL_DIRS = [
     [-1, 0],
@@ -66,7 +64,6 @@ module Slideable
     # subclass implements this
     raise NotImplementedError
   end
-end
 
 
 
