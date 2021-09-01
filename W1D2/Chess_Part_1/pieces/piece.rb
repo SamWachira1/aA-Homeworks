@@ -12,22 +12,30 @@ class Piece
     end
 
     def to_s
-        symbol
+       symbol 
+    end
+
+    def valid_moves
+        moves.select do |pos|
+            (board.in_bounds?(pos)) &&
+            (board.is_null?(pos)) || (board[pos].color != color)
+        end
+        
+    end
+
+    def empty?
+        false
+    end
+
+    def symbol
+      raise NotImplementedError
     end
 
     # def valid_moves
-    #     board.select do |pos|
-    #         (board.in_bounds?(pos)) &&
-    #         (board.is_null?(pos)) || (board[pos].color != color)
-    #     end
-        
+    #   moves.reject { |end_pos| move_into_check?(end_pos) }
     # end
 
-    def valid_moves
-      moves.reject { |end_pos| move_into_check?(end_pos) }
-    end
-
-    # private
+    private
 
 
     def move_into_check?(end_pos)

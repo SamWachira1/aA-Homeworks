@@ -76,7 +76,11 @@ class Board
     end
 
     def in_bounds?(pos)
-        pos.all? { |coord| coord.between?(0, 7) }
+        row, col = pos
+        row.between?(0, rows.length - 1) && col.between?(0, rows[1].length - 1)  
+
+        # pos.all? { |coord| coord.between?(0, 7) }
+
     end
 
     def pieces
@@ -84,7 +88,7 @@ class Board
     end
 
     def is_null?(pos)
-        self[pos] == null
+        self[pos] == :null
     end
 
     def [](pos)
@@ -102,13 +106,14 @@ class Board
      piece = self[start_pos]
      raise ArgumentError.new("This is not your piece!") if piece.color != color 
      raise ArgumentError.new("There is no piece at starting position.") if piece == nil
-     raise ArgumentError.new("You cannot move piece there") if !piece.valid_moves.include?(pos)
+     raise ArgumentError.new("You cannot move piece there") if !piece.valid_moves.include?(end_pos)
 
-     self[start_pos] = null
+     self[start_pos] = :null
      self[end_pos] = piece
      piece.pos = end_pos
 
     end
+
 
 
 end
