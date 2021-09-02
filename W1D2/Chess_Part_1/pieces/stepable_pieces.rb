@@ -16,12 +16,11 @@ module SteppingPiece
     end
 
 
-end
+    private
 
-private
-
-def move_diffs
-    raise NotImplementedError
+    def move_diffs
+        raise NotImplementedError
+    end
 end
 
 

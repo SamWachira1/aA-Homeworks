@@ -11,7 +11,7 @@ class Bishop < Piece
     protected 
 
     def move_dirs
-        diag
+      diagonal_dirs 
     end
 
 

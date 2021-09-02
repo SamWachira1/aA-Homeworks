@@ -6,8 +6,16 @@ class Board
 
     def initialize(fill_board = true)
        @null = NullPiece.instance
-       board = populate_board(fill_board)
-       board
+        populate_board(fill_board)
+    end
+
+    def populate_board(fill_board)
+     @rows = Array.new(8) {Array.new(8, @null) }
+        return unless fill_board
+        %i(white black).each do |color|
+            fill_back_row(color)
+            fill_pawn_row(color)
+        end
     end
 
     def [](pos)
@@ -48,11 +56,10 @@ class Board
     def in_check?(color)
        king_pos = find_king_pos(color).pos
 
-       pieces.any?  do |p|
+       pieces.any? do |p|
         p.color != color && p.moves.include?(king_pos)
        end
     end
-
 
     def move_piece(turn_color, start_pos, end_pos)
         raise "start position is empty" if empty?(start_pos)
@@ -82,15 +89,13 @@ class Board
        
     end
 
-
-     def pieces
-        @rows.flatten.reject(&:empty?)
+    def pieces
+        @rows.flatten.reject {|pos| empty?(pos)}
     end
 
     def valid_pos?(pos)
-       puts  pos.all? {|coord| coord.between?(0, 7) }
+      pos.all? {|coord| coord.between?(0, 7) }
     end
-
 
     private 
 
@@ -98,7 +103,7 @@ class Board
 
     def fill_back_row(color)
         back_ranks = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
-        row = (color == :white) ? 0 : 7
+        row = (color == :white) ? 7 : 0
         back_ranks.each_with_index do |rank, col|
             rank.new(color, self, [row, col])
         end
@@ -116,15 +121,7 @@ class Board
         king_pos || (raise "king not found")
     end
 
-    def populate_board(fill_board)
-     @rows = Array.new(8) {Array.new(8, @null) }
-        return unless fill_board
-        %i(white black).each do |color|
-            fill_back_row(color)
-            fill_pawn_row(color)
-        end
-    end
-
+    
 
 
 end
