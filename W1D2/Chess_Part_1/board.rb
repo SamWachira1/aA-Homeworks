@@ -19,20 +19,23 @@ class Board
     end
 
     def [](pos)
+        raise 'invalid pos' unless valid_pos?(pos)
         row, col = pos
         @rows[row][col]
     end
 
     def []=(pos, piece)
+        raise 'invalid pos' unless valid_pos?(pos)
         row, col = pos
         @rows[row][col] = piece
     end
 
     def add_piece(piece, pos)
-        self[pos] = piece
+       raise 'position not empty' unless empty?(pos)
+       self[pos] = piece
     end
 
-    def check_mate?(color)
+    def checkmate?(color)
         return false unless in_check?(color) 
 
         pieces.select {|p| p.color == color}.all? do |piece|
@@ -64,7 +67,6 @@ class Board
  
     def move_piece(turn_color, start_pos, end_pos)
     
-
         raise "start position is empty" if empty?(start_pos)
 
         piece = self[start_pos]
@@ -93,9 +95,8 @@ class Board
        
     end
 
-
     def pieces
-        @rows.flatten.reject {|pos| empty?(pos)}
+        @rows.flatten.reject(&:empty?)
     end
 
     def valid_pos?(pos)

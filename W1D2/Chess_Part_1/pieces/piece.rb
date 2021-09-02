@@ -11,9 +11,12 @@ class Piece
         @board = board
         @pos = pos
 
-        board.add_piece(self, pos)
+        @board.add_piece(self, pos)
     end
 
+    # def valid_pos?(pos)
+    #   pos.all? {|coord| coord.between?(0, 7) }
+    # end
 
 
     def to_s
@@ -21,7 +24,7 @@ class Piece
     end
 
     def empty?
-        false
+        false 
     end
 
     def symbol

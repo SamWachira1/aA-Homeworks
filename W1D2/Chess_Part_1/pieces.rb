@@ -8,3 +8,4 @@ require_relative 'pieces/rook'
 require_relative 'pieces/null'
 require_relative 'pieces/stepable_pieces'
 require_relative 'pieces/sliding_pieces'
+

@@ -49,7 +49,6 @@ class Cursor
     handle_key(key)
   end
 
-
   private
 
   def handle_key(key)

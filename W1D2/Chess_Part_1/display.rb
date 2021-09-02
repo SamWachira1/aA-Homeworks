@@ -3,12 +3,12 @@ require_relative "cursor"
 
 class Display
 
-    attr_reader :board, :selected, :cursor
+    attr_reader :board, :notifications, :cursor
 
     def initialize(board)
         @board = board
         @cursor = Cursor.new([0,0], board)
-        @selected = {}
+        @notifications = {}
     end
 
     def build_grid
@@ -19,34 +19,34 @@ class Display
 
     def build_row(row, i)
         row.map.with_index do |piece, j|
-            color = colors_for(i, j)
+            color_options = colors_for(i, j)
             piece.to_s.colorize(color)
         end
     end
 
     def colors_for(i, j)
         if cursor.cursor_pos == [i, j] && cursor.selected
-            bg = :green
-        elsif cursor.cursor_pos == [i ,j]
+            bg = :light_green
+        elsif cursor.cursor_pos == [i, j]
             bg = :light_red
         elsif (i + j).odd?
             bg = :light_blue
         else 
             bg = :light_yellow
         end
-        { background: bg}
+        { background: bg }
     end
 
   def reset!
-    @selected.delete(:error)
+    @notifications.delete(:error)
   end
 
   def uncheck!
-    @selected.delete(:check)
+    @notifications.delete(:check)
   end
 
   def set_check!
-    @selected[:check] = "Check!"
+    @notifications[:check] = "Check!"
   end
 
     def render
@@ -54,7 +54,7 @@ class Display
         puts "Navigate using WASD or arrow keys."
         build_grid.each {|row| puts row.join() }
 
-            @selected.each do |_key, val|
+            @notifications.each do |_key, val|
             puts val
         end
     end
