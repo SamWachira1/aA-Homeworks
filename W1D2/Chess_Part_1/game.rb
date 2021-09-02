@@ -51,6 +51,6 @@ class Game
 
 end
 
-# if $PROGRAM_NAME == __FILE__
-#   puts Game.new.play
-# end
+if $PROGRAM_NAME == __FILE__
+  puts Game.new.play
+end
