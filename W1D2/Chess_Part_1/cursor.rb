@@ -37,6 +37,11 @@ class Cursor
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
     @board = board
+    @selected = false
+  end
+
+  def toggle_selected
+    @selected = !@selected
   end
 
   def get_input
@@ -44,7 +49,23 @@ class Cursor
     handle_key(key)
   end
 
+
   private
+
+  def handle_key(key)
+    case key
+    when :ctrl_c
+      exit 0
+    when :return, :space 
+      toggle_selected
+      cursor_pos
+    when :left, :right, :up, :down
+      update_pos(MOVES[key])
+      nil
+    else 
+      puts key
+    end
+  end
 
   def read_char
     STDIN.echo = false # stops the console from printing return values
@@ -75,29 +96,8 @@ class Cursor
     return input
   end
 
-  def handle_key(key)
-    case key
-    when :return, :space
-        toggle_selected
-        cursor_pos
-    when :left, :right, :up, :down
-        puts key
-        update_pos(MOVES[key])
-        nil
-    when :ctrl_c
-        Process.exit 0
-    end
-  end
-
-  def toggle_selected
-    @selected = !@selected
-  end
-
   def update_pos(diff)
     new_pos = [cursor_pos[0] + diff[0], cursor_pos[1] + diff[1]]
-    if board.in_bounds?(new_pos)
-        toggle_selected if @selected
-        @cursor_pos = new_pos
-    end
+    @cursor_pos = new_pos if board.valid_pos?(new_pos)
   end
 end

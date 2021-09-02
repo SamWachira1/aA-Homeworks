@@ -61,7 +61,10 @@ class Board
        end
     end
 
+ 
     def move_piece(turn_color, start_pos, end_pos)
+    
+
         raise "start position is empty" if empty?(start_pos)
 
         piece = self[start_pos]
@@ -76,8 +79,9 @@ class Board
         move_piece!(start_pos, end_pos)
     end
 
-
+  
     def move_piece!(start_pos, end_pos)
+
         piece = self[start_pos]
         raise 'piece cannot move like that' unless piece.moves.include?(end_pos)
 
@@ -88,6 +92,7 @@ class Board
         nil
        
     end
+
 
     def pieces
         @rows.flatten.reject {|pos| empty?(pos)}
@@ -103,14 +108,14 @@ class Board
 
     def fill_back_row(color)
         back_ranks = [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]
-        row = (color == :white) ? 7 : 0
+        row = (color == :white) ? 0 : 7
         back_ranks.each_with_index do |rank, col|
             rank.new(color, self, [row, col])
         end
     end
 
     def fill_pawn_row(color)
-        row = (color == :white) ? 6 : 1
+        row = (color == :white) ? 1 : 6
         8.times do |col|
             Pawn.new(color, self, [row, col] )
         end
@@ -120,8 +125,6 @@ class Board
         king_pos = pieces.find {|p| p.color == color && p.is_a?(King)}
         king_pos || (raise "king not found")
     end
-
-    
 
 
 end

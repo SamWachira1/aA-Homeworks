@@ -1,17 +1,17 @@
-require_relative "board"
-require_relative "cursor"
 require "colorize"
+require_relative "cursor"
 
 class Display
 
-    attr_reader :cursor, :board, :selected
-    def initialize(board, cursor = true)
-        @board = Board.new
+    attr_reader :board, :selected, :cursor
+
+    def initialize(board)
+        @board = board
         @cursor = Cursor.new([0,0], board)
         @selected = {}
     end
 
-    def build_display_grid
+    def build_grid
         @board.rows.map.with_index do |row, i|
             build_row(row, i)
         end
@@ -19,23 +19,25 @@ class Display
 
     def build_row(row, i)
         row.map.with_index do |piece, j|
-            color = set_color(i, j)
+            color = colors_for(i, j)
             piece.to_s.colorize(color)
         end
     end
 
-    def render
-        system "clear"
-        puts "Navigate using WASD or arrow keys."
-        build_display_grid.each {|row| row.join("") }
-
-         selected.each do |_k, v|
-            puts v
+    def colors_for(i, j)
+        if cursor.cursor_pos == [i, j] && cursor.selected
+            bg = :green
+        elsif cursor.cursor_pos == [i ,j]
+            bg = :light_red
+        elsif (i + j).odd?
+            bg = :light_blue
+        else 
+            bg = :light_yellow
         end
-
+        { background: bg}
     end
 
- def reset!
+  def reset!
     @selected.delete(:error)
   end
 
@@ -47,20 +49,18 @@ class Display
     @selected[:check] = "Check!"
   end
 
-    def set_color(i, j)
+    def render
+        system "clear"
+        puts "Navigate using WASD or arrow keys."
+        build_grid.each {|row| puts row.join() }
 
-        if cursor.cursor_pos == [i, j] && cursor.selected
-            bg = :green
-        elsif cursor.cursor_pos == [i ,j]
-            bg = :light_yellow
-        elsif (i.even? && j.odd?) || (i.odd? && j.even?)
-            bg = :light_blue
-        else 
-            bg = :white
-        end
-        { background: bg}
+            @selected.each do |_key, val|
+            puts val
         end
     end
+end
 
 
-# p test = Display.new(self).render
+ 
+
+# p test = Display.new(self)
