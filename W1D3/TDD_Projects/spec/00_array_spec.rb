@@ -23,3 +23,30 @@ require '00_array'
 
     end
 
+    describe "#two_sum" do 
+        let(:array) {[2, -2, 1, 5, -4]}
+        let(:one_zero) {[1, 0, 3]}
+        let(:two_zero) {[2,3,4,0,0]}
+
+        it "finds the two_sum" do
+            expect(two_sum(array)).to eq([[0,1]])
+        end
+
+        it "doesn't confuse one zero" do
+            expect(two_sum(one_zero)).to eq([])
+        end
+
+        it "handles two zeros" do 
+            expect(two_sum(two_zero)).to eq([[3, 4]])
+        end
+    end
+
+
+
+
+
+
+
+
+
+
