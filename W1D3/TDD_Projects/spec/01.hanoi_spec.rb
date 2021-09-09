@@ -28,11 +28,11 @@ describe TowersOfHanoi do
             expect{towers.move(2, 1)}.not_to raise_error
         end
 
-        it "does not allow moving from empty disk" do
+        it "does not allow moving from an empty stack" do
             expect {towers.move(1, 2)}.to raise_error("cannot move an empty stack")
         end
 
-        it "does not allow moving to smaller disk" do
+        it "does not allow moving to smaller stack" do
             towers.move(0, 1)
             expect{towers.move(0, 1)}.to raise_error("cannot move to smaller disk")
         end
@@ -58,13 +58,13 @@ describe TowersOfHanoi do
         end
 
         it "has won when all the stacks are in tower 2" do
-                towers.move(0, 2)
-                towers.move(0, 1)
-                towers.move(2, 1)
-                towers.move(0, 2)
-                towers.move(1, 0)
-                towers.move(1, 2)
-                towers.move(0, 2)
+            towers.move(0, 2)
+            towers.move(0, 1)
+            towers.move(2, 1)
+            towers.move(0, 2)
+            towers.move(1, 0)
+            towers.move(1, 2)
+            towers.move(0, 2)
 
             expect(towers).to be_won
         end

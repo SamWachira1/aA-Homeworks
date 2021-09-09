@@ -19,8 +19,8 @@ class TowersOfHanoi
     end
 
     def move(from_tower, to_tower)
-        raise "does not allow moving from an empty stack" if @stacks[from_tower].empty?
-        raise "does not allow moving to smaller disk" unless valid_move?(from_tower, to_tower)
+        raise "cannot move an empty stack" if @stacks[from_tower].empty?
+        raise "cannot move to smaller disk" unless valid_move?(from_tower, to_tower)
 
         @stacks[to_tower] << @stacks[from_tower].pop
 
@@ -28,13 +28,20 @@ class TowersOfHanoi
 
     def valid_move?(from_tower, to_tower)
         return false unless [from_tower, to_tower].all? {|i| i.between?(0, 2)}
-        return false if @stacks[from_tower].empty? && @stacks[to_tower].empty?
-        
+    
+
         !@stacks[from_tower].empty? && (
         @stacks[to_tower].empty? ||
         @stacks[to_tower].last > @stacks[from_tower].last
         )
     end
+
+    def won?
+        @stacks[0].empty? && @stacks[1..2].any?(&:empty?)
+    end
+
+
+
 
 
 
