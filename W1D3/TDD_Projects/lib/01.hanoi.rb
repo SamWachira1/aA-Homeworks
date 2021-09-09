@@ -11,6 +11,27 @@ class TowersOfHanoi
       'Tower 2:  ' + @stacks[2].join('  ') + "\n"
     end
 
+    def play
+        display
+
+        until won?
+            puts "What tower do you want to move from"
+            from_tower = gets.to_i
+
+            puts "what tower do you want to move to"
+            to_tower = gets.to_i
+
+            if valid_move?(from_tower, to_tower)
+                 move(from_tower, to_tower)
+            else  
+                display
+                puts "Invalid move try again"
+            end
+        end
+        puts "you win!"
+    end
+
+
     def display
         # this moves everything up in the console so that whatever we print
         # afterwards appears at the top
@@ -40,16 +61,9 @@ class TowersOfHanoi
         @stacks[0].empty? && @stacks[1..2].any?(&:empty?)
     end
 
-
-
-
-
-
-
-
-
-
-
 end
 
 
+if $PROGRAM_NAME == __FILE__
+ p  TowersOfHanoi.new.play
+end
