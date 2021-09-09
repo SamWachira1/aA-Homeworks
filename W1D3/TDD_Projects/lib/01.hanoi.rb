@@ -65,5 +65,5 @@ end
 
 
 if $PROGRAM_NAME == __FILE__
- p  TowersOfHanoi.new.play
+   TowersOfHanoi.new.play
 end
