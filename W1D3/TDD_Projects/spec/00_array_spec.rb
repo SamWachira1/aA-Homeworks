@@ -42,6 +42,43 @@ require '00_array'
     end
 
 
+    describe "#my_transpose" do
+        it "transposes a matrix" do
+            matrix = [
+                [1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9]
+            ]
+            expect(my_transpose(matrix)).to eq([
+                [1, 4, 7],
+                [2, 5, 8],
+                [3, 6, 9]
+            ])
+        end
+    end
+
+    describe "#stock_picker" do
+        it "finds a simple pair" do
+            expect(stock_picker([3, 1, 0, 4, 6, 9])).to eq([4, 5])
+        end
+
+        it "finds a better pair after an inferior pair" do
+            expect(stock_picker([9,6,3,0,7])).to eq([3,4])
+        end
+
+        it "does not buy stocks in a crash" do
+            expect(stock_picker([5,4,3,2,1])).to be_nil
+        end
+    end
+
+
+
+
+
+
+
+
+
 
 
 
