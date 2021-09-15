@@ -107,7 +107,6 @@ describe Deck do
   end
 
   describe '#deal_hand' do
-    let(:hand) {Hand.new(cards)}
     let(:deck) { Deck.new }
 
     it 'should return a new hand' do

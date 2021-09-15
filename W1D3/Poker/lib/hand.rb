@@ -1,7 +1,7 @@
 class Hand
     
     attr_reader :cards 
-    def initalize(cards)
+    def initialize(cards)
         @cards = cards
     end
 
