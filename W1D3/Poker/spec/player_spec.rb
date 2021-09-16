@@ -39,11 +39,13 @@ describe Player do
         end
 
         it "should return amount deducted" do
-            expect(player.take_bet(20)).to eq(10)
+            expect(player.take_bet(10)).to eq(10)
         end
 
         it "should raise an error if the bet is more than bankroll " do
-            expect(player.take_bet(1000)).to raise_error("not enough money") #solution used a do block
+            expect do
+            player.take_bet(1000)
+            end.to raise_error 'not enough money'
         end
     end
 
@@ -55,9 +57,15 @@ describe Player do
         end
     end
 
-    describe 'return_cards' do
+    describe '#return_cards' do
         let(:hand) {double('hands')}
         let(:cards) {double("cards")}
+
+        before(:each) do 
+            player.deal_in(hand)
+            allow(hand).to receive(:cards).and_return(cards)
+        end
+
 
         it "should return the players cards" do
             expect(player.return_cards).to eq(cards)
@@ -69,23 +77,56 @@ describe Player do
         end
     end
 
+    describe "#fold" do
+        it "should set folded to true" do
+            player.fold
+            expect(player).to be_folded
+        end
+    end
 
+    describe '#unfold' do 
+        it "should set folded? to false " do
+            player.unfold
+            expect(player).to_not be_folded
+        end
+    end
 
+    describe '#folded?' do
+        let(:player) {Player.new(1000)}
 
+        it "should return true if player is folded" do
+            player.fold
+            expect(player).to be_folded
+        end
 
+        it "should return false otherwise" do
+            expect(player).to_not be_folded
+        end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    end
 
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
