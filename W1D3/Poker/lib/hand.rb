@@ -1,9 +1,16 @@
+require_relative './poker_hands'
+
 class Hand
+    include PokerHands
     
     attr_reader :cards 
-    def initialize(cards)
+    def initialize(cards) #how would we initialize this for testing?
         raise "must have five cards" unless cards.count == 5 
-        @cards = cards
+        @cards = cards.sort
+    end
+
+    def self.winner(hands)
+        hands.sort.last
     end
 
     def trade_cards(old_cards, new_cards)
@@ -34,10 +41,6 @@ class Hand
     def has_cards?(old_cards)
         old_cards.all? {|card| cards.include?(card)}
     end
-
-
-
-
 
 
 end
