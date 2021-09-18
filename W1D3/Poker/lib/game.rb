@@ -30,15 +30,4 @@ class Game
         amount 
     end
 
-
-
-
-    
-
-
-
-
-
-
-
 end
