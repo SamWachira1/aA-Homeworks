@@ -19,7 +19,7 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   p max_windowed_range([1, 0, 2, 5, 4, 8], 2) == 4 # 4, 8
-  p max_windowed_range([1, 0, 2, 5, 4, 8], 3) == 5 # 0, 2, 5
-  p max_windowed_range([1, 0, 2, 5, 4, 8], 4) == 6 # 2, 5, 4, 8
-  p max_windowed_range([1, 3, 2, 5, 4, 8], 5) == 6 # 3, 2, 5, 4, 8
+#   p max_windowed_range([1, 0, 2, 5, 4, 8], 3) == 5 # 0, 2, 5
+#   p max_windowed_range([1, 0, 2, 5, 4, 8], 4) == 6 # 2, 5, 4, 8
+#   p max_windowed_range([1, 3, 2, 5, 4, 8], 5) == 6 # 3, 2, 5, 4, 8
 end
