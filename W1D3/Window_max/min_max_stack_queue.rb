@@ -40,7 +40,6 @@ class MinMaxStackQueue
   end
 
     private
-
     def queueify
         @out_stack.push(@in_stack.pop) until @in_stack.empty?
     end
