@@ -10,22 +10,25 @@ class Array
   end
 end
 
+# arr = [1,"Sam",3,4,5,6]
+# p arr.hash
+
+
+
 class String
   def hash
     chars.map(&:ord).hash
   end
 end
 
+# str = "hello my name is james"
+# p str.hash
+
 class Hash
-  # This returns 0 because rspec will break if it returns nil
-  # Make sure to implement an actual Hash#hash method
   def hash
-    to_a.sort_by(&:hash).hash
+  to_a.sort_by(&:hash).hash
   end
 end
 
-a = {a: "sam", b: [2,4,5], c: 2}
-b = {a: "sam", b: [2,4,5], c: 2}
-
-p a.hash
-p b.hash
+h = {:foo => 0, "Sam" => 1,  "class"=>  [3, 2, 1] }
+p h.hash
