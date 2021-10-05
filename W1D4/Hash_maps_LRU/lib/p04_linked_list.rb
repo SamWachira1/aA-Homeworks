@@ -64,10 +64,10 @@ class LinkedList
   def append(key, val)
     new_node = Node.new(key, val)
 
-    self.tail.prev.next = new_node 
-    new_node.prev = self.tail.prev
-    new_node.next = self.tail
-    self.tail.prev = new_node
+    self.tail.prev.next = new_node #does this set node to tail?
+    new_node.prev = self.tail.prev #does this set node to head?
+    new_node.next = self.tail #does this set to tail?
+    self.tail.prev = new_node # does this set node to head?
 
     new_node
   end
@@ -104,3 +104,4 @@ class LinkedList
     inject([]) { |acc, node| acc << "[#{node.key}, #{node.val}]" }.join(', ')
   end
 end
+
