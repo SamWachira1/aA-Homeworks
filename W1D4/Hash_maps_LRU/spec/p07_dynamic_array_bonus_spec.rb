@@ -20,7 +20,7 @@ describe DynamicArray do
       expect(arr[1]).to eq(2)
     end
   end
-
+  
   describe "#count" do
     it "should keep count of the items in the array" do
       expect(arr.count).to eq(0)
