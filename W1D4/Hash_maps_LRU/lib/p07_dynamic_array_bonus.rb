@@ -31,7 +31,7 @@ class DynamicArray
 
   attr_accessor :store, :count, :start_idx
 
-  def initialize(capacity = 8)
+  def initialize(capacity = 3)
     @store = StaticArray.new(capacity)
     @count = 0
     @start_idx = 0
