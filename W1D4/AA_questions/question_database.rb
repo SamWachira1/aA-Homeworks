@@ -25,13 +25,13 @@ class User
     end
 
     def initialize(options)
-        @id = options.first['id']
-        @fname = options.first['fname']
-        @lname = options.first['lname']
+        @id = options['id']
+        @fname = options['fname']
+        @lname = options['lname']
     end
 
     def self.find_by_id(id)
-        user_data = QuestionsDatabase.instance.execute(<<-SQL, id)
+         user_data = QuestionsDatabase.instance.execute(<<-SQL, id)
             SELECT
                 users.*
             FROM 
@@ -39,12 +39,13 @@ class User
             WHERE
                 users.id = ?
         SQL
-        user_data.nil? ? nil : User.new(user_data)
+
+        User.new(user_data[0])
     end
 
     def self.find_by_name(fname, lname)
         attrs = { fname: fname, lname: lname }
-        user_data = QuestionsDatabase.get_first_row(<<-SQL, attrs)
+        user_data = QuestionsDatabase.instance.execute(<<-SQL, attrs)
             SELECT
                 users.*
             FROM 
@@ -52,8 +53,9 @@ class User
             WHERE 
                 users.fname = :fname AND users.lname = :lname
          SQL
-        return nil unless user_data.length > 0  
-        User.new(user_data)
+
+        # return nil unless user_data.length > 0  
+        User.new(user_data[0])
     end
 
 
