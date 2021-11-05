@@ -21,7 +21,6 @@ VALUES
     ('Samuel', 'Wachira'),
     ('James', 'Ness');
 
-
 -- QUESTIONS
 
 CREATE TABLE questions (
@@ -92,15 +91,16 @@ INSERT INTO
 VALUES
     ((SELECT id FROM questions WHERE questions.title = "James Question"), 
     NULL,
+
     (SELECT id FROM users WHERE users.fname = "Samuel" AND users.lname = "Wachira"),
-    "Yeah, you'll finish faster if your determined"
+    "it takes a while, you'll finish faster if your determined"
     );
 
 INSERT INTO 
     replies (question_id, parent_reply_id, author_id, body)
 VALUES
     ((SELECT id FROM questions WHERE questions.title = "James Question"),
-    (SELECT id FROM replies WHERE body = "Yeah, you'll finish faster if your determined"),
+    (SELECT id FROM replies WHERE body = "it takes a while, you'll finish faster if your determined"),
     (SELECT id FROM users WHERE users.fname = "James" AND users.lname = "Ness" ),
     "Thank you so much I'll get started"
     );
