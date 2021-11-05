@@ -35,6 +35,7 @@ class Array
         Array.merge(sorted_left, sorted_right, &prc)
     end
 
+
     private
     def self.merge(left, right, &prc)
 
@@ -110,8 +111,18 @@ def fast_dance(direction, tiles_hash)
     tiles_hash[direction]
 end
 
-# p fast_dance("up", tiles_hash)
+# p fast_dance("right-up", tiles_hash)
 
+
+
+
+def merge_sort(arr)
+    mid_point = arr.length / 2
+    p left = arr.take(mid_point)
+    p right = arr.drop(mid_point)
+end
+
+merge_sort([38, 27, 43, 3])
 
 
 
