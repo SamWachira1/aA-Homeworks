@@ -65,6 +65,11 @@ class User
         Reply.find_by_user_id(user_id)
     end
 
+    def followed_questions
+        QuestionFollow.followed_questions_for_user_id(id)
+    end
+
+
 end
 
 class Question
@@ -117,6 +122,10 @@ class Question
     def replies
         Reply.find_by_question_id(id)
     end
+
+    def followers
+        QuestionFollow.followers_for_question_id(id)
+     end
 
 end
 
@@ -177,8 +186,8 @@ class Reply
 
 
     def self.all
-      reply_data = QuestionsDatabase.instance.execute("SELECT * FROM replies")
-      reply_data.map {|datum| Reply.new(datum)}
+        reply_data = QuestionsDatabase.instance.execute("SELECT * FROM replies")
+        reply_data.map {|datum| Reply.new(datum)}
     end
 
     def initialize(options)
@@ -204,6 +213,73 @@ class Reply
     def child_replies
         Reply.find_by_parent_id(id)
     end
+
+end
+
+
+# CREATE TABLE question_follows (
+#     id INTEGER PRIMARY KEY,
+#     user_id INTEGER NOT NULL,
+#     question_id INTEGER NOT NULL,
+
+#     FOREIGN KEY (user_id) REFERENCES users(id),
+#     FOREIGN KEY (question_id) REFERENCES questions(id)
+# );
+
+class QuestionFollow
+
+    attr_reader :id
+    attr_accessor :user_id, :question_id
+
+    def self.all
+        question_follow_data = QuestionsDatabase.instance.execute("SELECT * FROM question_follows")
+        question_follow_data.map  {|datum| QuestionFollow.new(datum)}
+    end
+
+    def initialize(options)
+        @id = options["id"]
+        @user_id = options["user_id"]
+        @question_id = options["question_id"]
+    end
+
+    def self.followers_for_question_id(question_id)
+
+        question_follow_data = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+            SELECT
+                users.*
+            FROM
+                users
+            JOIN
+                question_follows
+            ON 
+                users.id = question_follows.user_id 
+            WHERE
+                question_follows.question_id = :question_id 
+        SQL
+        question_follow_data.map {|datum| User.new(datum)}
+    end
+
+    def self.followed_questions_for_user_id(user_id)
+         question_follow_data = QuestionsDatabase.instance.execute(<<-SQL, user_id)
+            SELECT
+             questions.*
+            FROM 
+             questions
+            JOIN
+             question_follows
+            ON 
+             questions.id = question_follows.question_id
+            WHERE
+             question_follows.user_id = :user_id 
+        SQL
+        Question.new(question_follow_data.first)
+    end
+
+   
+
+
+    
+
 
 
 
