@@ -67,7 +67,7 @@ def nlogn_biggest_fish(fishes)
     fishes.merge_sort(&prc)[0]
 end
 
-# p nlogn_biggest_fish(['fish', 'fiiish', 'fiiiiish', 'fiiiish', 'fffish', 'ffiiiiisshh', 'fsh', 'fiiiissshhhhhh'])
+p nlogn_biggest_fish(['fish', 'fiiish', 'fiiiiish', 'fiiiish', 'fffish', 'ffiiiiisshh', 'fsh', 'fiiiissshhhhhh'])
 
 
 #Smart Octopus
@@ -117,6 +117,7 @@ end
 
 
 def merge_sort(arr)
+    
     mid_point = arr.length / 2
     p left = arr.take(mid_point)
     p right = arr.drop(mid_point)
