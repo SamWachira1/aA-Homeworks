@@ -1,0 +1,134 @@
+  [1m[35m (169.0ms)[0m  [1m[35mCREATE DATABASE "ResidenceProj_development" ENCODING = 'unicode'[0m
+  [1m[35m (104.6ms)[0m  [1m[35mCREATE DATABASE "ResidenceProj_test" ENCODING = 'unicode'[0m
+  [1m[35m (58.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (10.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3162149908112875680)[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateHouse (20211120211253)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (17.4ms)[0m  [1m[35mCREATE TABLE "houses" ("id" bigserial primary key, "address" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (4.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20211120211253"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePerson (20211120211323)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (10.2ms)[0m  [1m[35mCREATE TABLE "people" ("id" bigserial primary key, "name" character varying NOT NULL, "house_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20211120211323"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (3.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-11-20 21:25:11.614918"], ["updated_at", "2021-11-20 21:25:11.614918"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(3162149908112875680)[0m
+  [1m[35m (13.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3162149908112875680)[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3162149908112875680)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHouse Create (2.9ms)[0m  [1m[32mINSERT INTO "houses" ("address", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["address", "100 Avenue Rd, Belvidare MA "], ["created_at", "2021-11-20 23:25:22.459629"], ["updated_at", "2021-11-20 23:25:22.459629"]]
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHouse Create (0.8ms)[0m  [1m[32mINSERT INTO "houses" ("address", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["address", "100 Avenue Rd, Belvidare MA "], ["created_at", "2021-11-20 23:26:39.218132"], ["updated_at", "2021-11-20 23:26:39.218132"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHouse Create (1.1ms)[0m  [1m[32mINSERT INTO "houses" ("address", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["address", "100 Avenue Rd, Belvidare MA "], ["created_at", "2021-11-20 23:28:47.263567"], ["updated_at", "2021-11-20 23:28:47.263567"]]
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHouse Load (0.4ms)[0m  [1m[34mSELECT "houses".* FROM "houses" WHERE "houses"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mPerson Create (2.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "house_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "James Bond"], ["house_id", 3], ["created_at", "2021-11-20 23:28:47.293192"], ["updated_at", "2021-11-20 23:28:47.293192"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mHouse Load (0.8ms)[0m  [1m[34mSELECT "houses".* FROM "houses"[0m
+  [1m[36mHouse Load (0.3ms)[0m  [1m[34mSELECT "houses".* FROM "houses" ORDER BY "houses"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mPerson Load (0.4ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."house_id" = $1[0m  [["house_id", 1]]
+  [1m[36mPerson Load (0.5ms)[0m  [1m[34mSELECT "people".* FROM "people"[0m
+  [1m[36mPerson Load (0.4ms)[0m  [1m[34mSELECT "people".* FROM "people" ORDER BY "people"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mHouse Load (0.4ms)[0m  [1m[34mSELECT "houses".* FROM "houses" WHERE "houses"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mHouse Load (0.7ms)[0m  [1m[34mSELECT "houses".* FROM "houses" ORDER BY "houses"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mPerson Load (0.4ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."house_id" = $1[0m  [["house_id", 1]]
+  [1m[36mHouse Load (0.8ms)[0m  [1m[34mSELECT "houses".* FROM "houses"[0m
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people"[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (8149.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ResidenceProj_development"[0m
+  [1m[35m (2.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (4.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (36.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ResidenceProj_development"[0m
+  [1m[35m (42.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "ResidenceProj_test"[0m
+  [1m[35m (215.5ms)[0m  [1m[35mCREATE DATABASE "ResidenceProj_development" ENCODING = 'unicode'[0m
+  [1m[35m (67.1ms)[0m  [1m[35mCREATE DATABASE "ResidenceProj_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (2.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "houses" CASCADE[0m
+  [1m[35m (11.8ms)[0m  [1m[35mCREATE TABLE "houses" ("id" bigserial primary key, "address" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "people" CASCADE[0m
+  [1m[35m (6.3ms)[0m  [1m[35mCREATE TABLE "people" ("id" bigserial primary key, "name" character varying NOT NULL, "house_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20211120211323)[0m
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20211120211253);
+
+[0m
+  [1m[35m (6.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-11-20 23:38:40.700622"], ["updated_at", "2021-11-20 23:38:40.700622"]]
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "88344d5ce491c30512526ac73a52f6751ddc97bc"], ["created_at", "2021-11-20 23:38:40.716213"], ["updated_at", "2021-11-20 23:38:40.716213"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "houses" CASCADE[0m
+  [1m[35m (13.9ms)[0m  [1m[35mCREATE TABLE "houses" ("id" bigserial primary key, "address" character varying NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "people" CASCADE[0m
+  [1m[35m (7.7ms)[0m  [1m[35mCREATE TABLE "people" ("id" bigserial primary key, "name" character varying NOT NULL, "house_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20211120211323)[0m
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20211120211253);
+
+[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-11-20 23:38:40.825146"], ["updated_at", "2021-11-20 23:38:40.825146"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (1.9ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2021-11-20 23:38:40.835393"], ["key", "environment"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "schema_sha1"], ["value", "88344d5ce491c30512526ac73a52f6751ddc97bc"], ["created_at", "2021-11-20 23:38:40.845695"], ["updated_at", "2021-11-20 23:38:40.845695"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHouse Create (1.5ms)[0m  [1m[32mINSERT INTO "houses" ("address", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["address", "100 Avenue Rd"], ["created_at", "2021-11-20 23:38:40.947597"], ["updated_at", "2021-11-20 23:38:40.947597"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mHouse Load (0.5ms)[0m  [1m[34mSELECT "houses".* FROM "houses" WHERE "houses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPerson Create (1.3ms)[0m  [1m[32mINSERT INTO "people" ("name", "house_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "James Bond"], ["house_id", 1], ["created_at", "2021-11-20 23:38:40.998218"], ["updated_at", "2021-11-20 23:38:40.998218"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mHouse Load (0.6ms)[0m  [1m[34mSELECT "houses".* FROM "houses"[0m
+  [1m[36mPerson Load (1.8ms)[0m  [1m[34mSELECT "people".* FROM "people"[0m
+  [1m[36mHouse Load (0.4ms)[0m  [1m[34mSELECT "houses".* FROM "houses" ORDER BY "houses"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mPerson Load (0.3ms)[0m  [1m[34mSELECT "people".* FROM "people" WHERE "people"."house_id" = $1[0m  [["house_id", 1]]
+  [1m[36mPerson Load (0.4ms)[0m  [1m[34mSELECT "people".* FROM "people" ORDER BY "people"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mHouse Load (1.1ms)[0m  [1m[34mSELECT "houses".* FROM "houses" WHERE "houses"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
