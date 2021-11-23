@@ -116,20 +116,129 @@ end
 
 
 
-def merge_sort(arr)
-    
-    mid_point = arr.length / 2
-    p left = arr.take(mid_point)
-    p right = arr.drop(mid_point)
+
+# merge_sort([38, 27, 43, 3])
+
+
+
+
+
+
+
+
+
+
+
+
+Dog.destroy_all
+dog1 = Dog.create(name: "Cliff")
+dog2 = Dog.create(name: "Snoopy")
+
+Toys.destroy_all
+toy1 = Toys.create(name: "big_bone", color: "white", dog_id: dog1.id)
+toy2 = Toys.create(name: "towel", color: "greem", dog_id: dog2.id)
+toy3 = Toys.create(name: "dog_house", color: "red", dog_id: dog1.id)
+toy4 = Toys.create(name: "blanket", color: "red", dog_id: dog2.id)
+
+
+def change
+    create_table :houses do |t|
+      t.string :name, null: false
+    end
+  end
+
+    def change
+    add_column :toys, :dog_id, :integer, null: false
+    add_column :toys, :color, :string, null: false
+  end
+
+    def change
+    create_table :toys do |t|
+      t.string :name, null: false
+    end
+  end
+
+    def change
+    create_table :dogs do |t|
+      t.string :name, null: false
+    end
+  end
+
+
+class Toys < ApplicationRecord
+
+    belongs_to(:dogs, {
+        primary_key: :id,
+        foreign_key: :dog_id,
+        class_name: :Dog
+    })
+
+    has_one(:houses, {
+        through: :dogs,
+        source: :houses
+    })
+
 end
 
-merge_sort([38, 27, 43, 3])
+
+
+class House < ApplicationRecord
+
+    has_many(:dogs, {
+        primary_key: :id,
+        foreign_key: :house_id,
+        class_name: :Dog
+    })
+
+
+    has_many(:toys, {
+        through: :dogs,
+        source: :toys
+    })
+
+
+end
+
+
+
+class Dog < ApplicationRecord
+    validates :name, presence: true 
+    validate :check_name_length
+
+    def check_name_length
+        unless self.name.length >= 2
+            errors[:name] << "too short has to be greater than or equl to 2"
+        end
+    end
+
+    belongs_to(:houses, {
+        primary_key: :id,
+        foreign_key: :house_id,
+        class_name: :House
+    })
+
+    has_many(:toys, {
+        primary_key: :id,
+        foreign_key: :dog_id,
+        class_name: :Toys
+    })
+
+end
+
+
+gem 'pry-rails'
+  gem 'annotate'
 
 
 
 
+  bundle exec rails db:create 
 
+  bundle exec rails g migration createDog
 
+  bundle exec rails g migration addDogIdToToys
 
+  ps -ef | grep postgres 
+  kill -9 #                      
 
-
+   bundle exec rails g migration addDogIdToToys
