@@ -27,55 +27,55 @@ class Question < ApplicationRecord
  
     def results_n_plus_1 
         results = {}
+
         answer_choices.each do |ac|
-            results[ac.text] = ac.responses.count
+            results[ac.text] = responses.count 
         end
+
         results
     end
 
     def results_2_queries
         results = {}
-        
         self.answer_choices.includes(:responses).each do |ac|
-            results[ac.text] = ac.responses.count
+            results[ac.text] = responses.count
         end
-
         results
     end
-
 
     def results_1_query_SQL
         acs = AnswerChoice.find_by_sql([<<-SQL, id])
             SELECT
-                answer_choices.text, COUNT(responses.id) AS num_responses
-            FROM
+                answer_choices.text, COUNT(responses.id) AS num_votes
+            FROM 
                 answer_choices
-            LEFT OUTER JOIN 
+            JOIN
                 responses ON answer_choices.id = responses.answer_choice_id
-            WHERE 
+            WHERE
                 answer_choices.question_id = ?
-            GROUP BY 
-                answer_choices.id      
+            GROUP BY
+                answer_choices.id 
         SQL
 
-
         acs.inject({}) do |results, ac|
-            results[ac.text] = ac.num_responses; results
+            results[ac.text] = ac.num_votes; results
         end
+
     end
 
 
     def results 
+
         acs = self.answer_choices
-            .select('answer_choices.text, COUNT(responses.id) as num_responses')
-            .left_outer_joins(:responses).group('answer_choices.id')
+                .select('answer_choices.text, COUNT(responses.id) AS num_votes')
+                .left_outer_joins(:responses)
+                .group('answer_choices.id')
+
+
 
         acs.inject({}) do |results, ac|
-            results[ac.text] = ac.num_responses; results 
+            results[ac.text] = ac.num_votes; results
         end
-
     end
-
-
 
 end

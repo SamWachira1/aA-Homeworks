@@ -48,14 +48,14 @@ ActiveRecord::Base.transaction do
       respondent_id: u3.id,
       answer_choice_id: a4.id)
 
-     r5 = Response.create!(
-    respondent_id: u4.id,
-    answer_choice_id: a1.id)
+    r5 = Response.create!(
+      respondent_id: u4.id,
+      answer_choice_id: a1.id)
 
-  # r4 = Response.create!(
-  #   respondent_id: u1.id,
-  #   answer_choice_id: a2.id
-  # )
+  r4 = Response.create!(
+    respondent_id: u1.id,
+    answer_choice_id: a2.id
+  )
 
 
 end
