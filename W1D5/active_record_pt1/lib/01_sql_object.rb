@@ -137,8 +137,16 @@ end
 
 class Human < SQLObject
     self.table_name = "humans"
-
     finalize!
+
+    def initialize(person_data)
+      person_data = Hash.new
+      @fname = person_data[:fname]
+      @lname = person_data[:lname]
+      @house_id = person_data[:house_id]
+    end
+
+  
 end
 
  
