@@ -7,7 +7,7 @@ module Searchable
 
    where_line = params.keys.map {|key| "#{key} = ?"}.join("AND")
 
-    results = DbConnection.execute(<<-SQL, *params.value)
+    results = DBConnection.execute(<<-SQL, *params.values)
       SELECT 
         *
       FROM 

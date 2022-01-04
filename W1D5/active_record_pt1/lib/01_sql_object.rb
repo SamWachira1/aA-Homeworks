@@ -133,26 +133,30 @@ class SQLObject
 end
 
 
-
-
 class Human < SQLObject
     self.table_name = "humans"
+    belongs_to :house, :foreign_key => :house_id  
+    has_many :cat, :foreign_key => :owner_id
+    
+
     finalize!
-
-    def initialize(person_data)
-      person_data = Hash.new
-      @fname = person_data[:fname]
-      @lname = person_data[:lname]
-      @house_id = person_data[:house_id]
-    end
-
-  
 end
 
  
 class Cat < SQLObject
   self.table_name = 'cats'
-
+  belongs_to :human,  :foreign_key => :owner_id
+  # has_one_through :home , :human, :house
+ 
   finalize!
 end
+
+class House < SQLObject
+  self.table_name = 'houses'
+  has_many :human, :foreign_key=> :house_id 
+
+  finalize!
+
+end
+
 
