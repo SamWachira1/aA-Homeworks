@@ -1,0 +1,42 @@
+/* PHASE 5: Cats */
+
+.content-header {
+  position: relative;
+  height: 200px;
+  width: 100%;
+  background: url("/Users/samuelwachira/Downloads/skeleton-2/images/cats.jpg");
+  background-size: cover;
+  border-bottom: 1px solid #ccc;
+}
+
+
+.content-header > h1  {
+  position: absolute;
+  bottom: 20px;
+  left: 240px;
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 300;
+  color: #fff;
+  text-shadow: #000 0 0 10px;
+}
+
+
+.header-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: #000;
+    padding: 10px 20px;    
+    font-weight: bold;
+
+    background: #fff;
+    border-radius:  10px 100px / 120px;
+    border: 1px solid #000;
+
+}
+
+.content-header button:hover {
+  background: #eee;
+}
+
