@@ -1,0 +1,62 @@
+<h1>Our Lovely: <%=@cat.name%></h1>
+
+
+<table>
+    <thead>
+        <tr>
+            <th scope="col">Attributes</th>
+            <th scope="col">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">Age</th>
+            <td><%=@cat.age%></td>
+        </tr>
+
+        <tr>
+            <th scope="row">Birthdate</th>
+            <td><%=@cat.birthdate%></td>
+        </tr>
+
+         <tr>
+            <th scope="row">Color</th>
+            <td><%=@cat.color%></td>
+        </tr>
+
+        <tr>
+            <th scope="row">Sex</th>
+            <td><%=@cat.sex%></td>
+        </tr>
+
+          <tr>
+            <th scope="row">Description</th>
+            <td><%=@cat.description%></td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+<h2>Rental Requests</h2>
+<table>
+  <tr>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Status</th>
+  </tr>
+  <% CatRentalRequest.all.order('start_date').each do |req| %>
+    <% if req.cat_id == @cat.id %>
+    <tr>
+        <td><%= req.start_date%></td>
+        <td><%= req.end_date%></td>
+        <td><%= req.status %></td>
+        <% if req.status == "PENDING"%>
+        <td><%= button_to 'Approve',   approve_cat_rental_request_url(req.id), method: :approve %></td>
+        <td><%= button_to 'Denied',  deny_cat_rental_request_url(req.id), method: :deny %></td>
+        <% end %>
+    </tr>
+    
+    <%end%>
+  <% end %>
+</table>
