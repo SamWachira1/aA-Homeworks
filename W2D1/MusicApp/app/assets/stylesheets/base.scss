@@ -1,0 +1,123 @@
+p, a, input {
+  font-family: 'Fredoka One';
+  font-size: 18px;
+}
+
+
+p {
+  color: #fff;
+}
+
+a, input[type='submit'] {
+
+  &:hover {
+    transition: .5s;
+    color: #ffff;
+  }
+}
+
+.button {
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color:  #0059ff;
+  color: white;
+  margin-bottom: 20px;
+  margin-right: 40%;
+
+
+  &:hover {
+    background-color: dodgerblue;
+    cursor: pointer;
+  }
+
+}
+
+input[type="submit"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0059ff;
+  margin-bottom: 20px;
+  color: white;
+
+  &:hover {
+    color: white;
+    background-color: dodgerblue;
+    cursor: pointer;
+  }
+}
+
+
+h1, h2, h3, h4 {
+font-family: 'Fredoka One';
+
+}
+
+.main-background {
+  background-image: url('https://cdn.wallpapersafari.com/39/6/DRtqar.jpg');
+  background-repeat: no-repeat; 
+  background-size: 100% 102%;
+}
+
+.main-content {
+  width: 77%;
+  margin: 7%;
+  padding: 30px;
+  border-width: 0 5px;
+  
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  .main-logo {
+    font-size: 75px;
+    margin-bottom: 30px;
+    color: yellow;
+
+  }
+
+   nav  {
+    width: 49%;
+    display: flex;
+    justify-content: space-around;
+    //  border: 2px solid black;
+
+
+    .user-detail {
+      display: flex;
+
+      p {
+        margin: 10px;
+      }
+    }
+
+   }
+
+}
+
+
+
+.page-header {
+  font-size: 40px;
+  color: yellow;
+  margin-bottom: 30px;
+}
+
+.label-style {
+  font-family: 'Fredoka One';
+  font-size: 16px;
+  color: #fff;
+}
+ 
+
+
+body {
+  background-color: #ffff;
+  // width: 100%;
+  // height: 100%
+}
+

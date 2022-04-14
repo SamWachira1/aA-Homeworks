@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <title>Music App</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+  <div class='main-content main-background' >
+    <nav>
+    <h1 class='main-logo'>Music App</h1>
+      <div class='user-detail'>
+          <% if current_user.nil? %>
+          <a href="<%= new_session_url %>"></a>
+          <a href="<%= new_users_url %>"></a>
+          <%else%>
+            <p>Logged in user: <%= current_user.email_address %> </p>
+            <form action="<%= session_url %>" method="post">
+            <%= auth_token %>
+
+            <input type= "hidden" name= "_method" value= "delete">
+            <input type= "submit" value= "logout">
+            
+            </form>
+          <%end%>
+      </div>
+    </nav>
+
+    <main>
+      <%= yield %>
+    </main>
+
+  </div>
+  </body>
+</html>
